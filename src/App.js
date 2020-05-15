@@ -1,38 +1,29 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { getPokemonState } from './State/Selectors/pokemonStateSelectors';
-import { getPokemon } from './State/Actions/pokemonStateActions';
+import {
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+} from 'reactstrap';
 
-import logo from './logo.svg';
+import { HomeContainer } from './Pages/homeContainer';
+
 import './App.css';
 
 function App() {
-  const pokemonState = useSelector(getPokemonState);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!pokemonState.getPokemonLoadable.isReceived) {
-      dispatch(getPokemon())
-    }
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar color="primary" dark expand="md">
+        <NavbarBrand href="/">Pokédex</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+      </Navbar>
+      <Switch>
+        <Route path="/" component={HomeContainer} />
+      </Switch>
     </div>
   );
 }
