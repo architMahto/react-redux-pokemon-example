@@ -12,7 +12,7 @@ export const Home = ({ pokemonList }) => {
     <>
       <PokemonList>
         {pokemonData.map((pokemon, index) => (
-          <Link key={index} to={`/details/${pokemon['name']}`}>
+          <Link key={index} to={`/pokedex/details/${pokemon['name']}`}>
             <PokemonListItem className="hvr-float">
               <img
                 src={pokemon['imageUrl']}

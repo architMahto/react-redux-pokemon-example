@@ -23,8 +23,8 @@ function App() {
         <NavbarToggler onClick={toggle} />
       </Navbar>
       <Switch>
-        <Route exact path="/" component={HomeContainer} />
-        <Route path="/details/:id" component={DetailsContainer} />
+        <Route exact path="/pokedex" component={HomeContainer} />
+        <Route path="/pokedex/details/:id" component={DetailsContainer} />
       </Switch>
     </div>
   );
