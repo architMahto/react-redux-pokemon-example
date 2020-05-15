@@ -1,15 +1,15 @@
-export const GET_POKEMON = 'GET_POKEMON';
-export const GET_POKEMON_SUCCESS = 'GET_POKEMON_SUCCESS';
-export const GET_POKEMON_ERROR = 'GET_POKEMON_ERROR';
+export const GET_POKEMON_LIST = 'GET_POKEMON_LIST';
+export const GET_POKEMON_LIST_SUCCESS = 'GET_POKEMON_LIST_SUCCESS';
+export const GET_POKEMON_LIST_ERROR = 'GET_POKEMON_LIST_ERROR';
 
-export const getPokemon = () => {
-  return { type: GET_POKEMON };
+export const getPokemonList = () => {
+  return { type: GET_POKEMON_LIST };
 };
 
-export const getPokemonSuccess = (result) => {
-  return { type: GET_POKEMON_SUCCESS, result };
+export const getPokemonListSuccess = (result) => {
+  return { type: GET_POKEMON_LIST_SUCCESS, result };
 };
 
-export const getPokemonError = (error) => {
-  return { type: GET_POKEMON_ERROR, error }
+export const getPokemonListError = (error) => {
+  return { type: GET_POKEMON_LIST_ERROR, error }
 };

@@ -5,30 +5,30 @@ import {
   updateLoadableOnError
 } from '../../Models/loadable';
 import {
-  GET_POKEMON,
-  GET_POKEMON_SUCCESS,
-  GET_POKEMON_ERROR
+  GET_POKEMON_LIST,
+  GET_POKEMON_LIST_SUCCESS,
+  GET_POKEMON_LIST_ERROR
 } from '../Actions/pokemonStateActions';
 
 export default function pokemonStateReducer(state = createDefaultPokemonState(), action) {
   switch (action.type) {
-    case GET_POKEMON:
+    case GET_POKEMON_LIST:
       return {
         ...state,
-        getPokemonLoadable: updateLoadableOnStart()
+        getPokemonListLoadable: updateLoadableOnStart()
       };
 
-    case GET_POKEMON_SUCCESS:
+    case GET_POKEMON_LIST_SUCCESS:
       return {
         ...state,
         entities: action.result,
-        getPokemonLoadable: updateLoadableOnSuccess()
+        getPokemonListLoadable: updateLoadableOnSuccess()
       };
 
-    case GET_POKEMON_ERROR:
+    case GET_POKEMON_LIST_ERROR:
       return {
         ...state,
-        getPokemonLoadable: updateLoadableOnError(action.error)
+        getPokemonListLoadable: updateLoadableOnError(action.error)
       };
 
     default:

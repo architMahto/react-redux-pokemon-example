@@ -1,12 +1,12 @@
 import { call, put } from 'redux-saga/effects';
-import { getPokemonSuccess, getPokemonError } from '../Actions/pokemonStateActions';
+import { getPokemonListSuccess, getPokemonListError } from '../Actions/pokemonStateActions';
 import PokemonService from '../../Services/pokemonService';
 
-export function* onGetPokemon(action) {
+export function* onGetPokemonList(action) {
   try {
     let response = yield call(PokemonService.retrievePokemon);
-    yield put(getPokemonSuccess(response['results']));
+    yield put(getPokemonListSuccess(response['results']));
   } catch (err) {
-    yield put(getPokemonError(err));
+    yield put(getPokemonListError(err));
   }
 };
