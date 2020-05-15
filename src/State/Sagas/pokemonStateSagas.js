@@ -6,13 +6,15 @@ import {
   getSelectedPokemonInfoSuccess,
   getSelectedPokemonInfoError
 } from '../Actions/pokemonStateActions';
-
+import { buildPokemonList, buildSelectedPokemonInfo } from '../../Models/pokemonState';
 import PokemonService from '../../Services/pokemonService';
 
 export function* onGetPokemonList(action) {
   try {
     let response = yield call(PokemonService.retrievePokemon);
-    yield put(getPokemonListSuccess(response['results']));
+    yield put(getPokemonListSuccess(
+      buildPokemonList(response['results'])
+    ));
   } catch (err) {
     yield put(getPokemonListError(err));
   }
@@ -21,7 +23,9 @@ export function* onGetPokemonList(action) {
 export function* onGetSelectedPokemonInfo(action) {
   try {
     let response = yield call(PokemonService.retrievePokemonByName, action.pokemonName);
-    yield put(getSelectedPokemonInfoSuccess(response));
+    yield put(getSelectedPokemonInfoSuccess(
+      buildSelectedPokemonInfo(response)
+    ));
   } catch (err) {
     yield put(getSelectedPokemonInfoError(err));
   }

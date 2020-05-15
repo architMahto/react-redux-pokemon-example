@@ -43,6 +43,7 @@ export default function pokemonStateReducer(state = createDefaultPokemonState(),
     case GET_SELECTED_POKEMON_INFO_SUCCESS:
       return {
         ...state,
+        selectedPokemonInfo: action.result,
         getSelectedPokemonInfoLoadable: updateLoadableOnSuccess()
       };
 
