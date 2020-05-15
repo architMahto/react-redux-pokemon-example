@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import './index.css';
+
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import { createDefaultAppState } from './Models/appState';
+import configureStore from './State/configureStore';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={configureStore(createDefaultAppState())}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
