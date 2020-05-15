@@ -10,7 +10,10 @@ import {
   GET_POKEMON_LIST_ERROR,
   GET_SELECTED_POKEMON_INFO,
   GET_SELECTED_POKEMON_INFO_SUCCESS,
-  GET_SELECTED_POKEMON_INFO_ERROR
+  GET_SELECTED_POKEMON_INFO_ERROR,
+  GET_SELECTED_POKEMON_SPECIES_INFO,
+  GET_SELECTED_POKEMON_SPECIES_INFO_SUCCESS,
+  GET_SELECTED_POKEMON_SPECIES_INFO_ERROR
 } from '../Actions/pokemonStateActions';
 
 export default function pokemonStateReducer(state = createDefaultPokemonState(), action) {
@@ -43,7 +46,10 @@ export default function pokemonStateReducer(state = createDefaultPokemonState(),
     case GET_SELECTED_POKEMON_INFO_SUCCESS:
       return {
         ...state,
-        selectedPokemonInfo: action.result,
+        selectedPokemonInfo: {
+          ...state.selectedPokemonInfo,
+          ...action.result
+        },
         getSelectedPokemonInfoLoadable: updateLoadableOnSuccess()
       };
 
@@ -52,6 +58,28 @@ export default function pokemonStateReducer(state = createDefaultPokemonState(),
         ...state,
         getSelectedPokemonInfoLoadable: updateLoadableOnError(action.error)
       };
+
+      case GET_SELECTED_POKEMON_SPECIES_INFO:
+        return {
+          ...state,
+          getSelectedPokemonSpeciesInfoLoadable: updateLoadableOnStart()
+        };
+
+      case GET_SELECTED_POKEMON_SPECIES_INFO_SUCCESS:
+        return {
+          ...state,
+          selectedPokemonInfo: {
+            ...state.selectedPokemonInfo,
+            description: action.result
+          },
+          getSelectedPokemonSpeciesInfoLoadable: updateLoadableOnSuccess()
+        };
+
+      case GET_SELECTED_POKEMON_SPECIES_INFO_ERROR:
+        return {
+          ...state,
+          getSelectedPokemonSpeciesInfoLoadable: updateLoadableOnError(action.error)
+        };
 
     default:
       return state;

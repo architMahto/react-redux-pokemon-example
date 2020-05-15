@@ -25,13 +25,31 @@ export function buildPokemonList(pokemonList) {
 
 export function buildPokemonTypes(type) {
   return type['type']['name'];
+};
+
+export function buildNotHiddenPokemonAbilities(ability) {
+  return !ability['is_hidden'];
+};
+
+export function buildPokemonAbilities(abilities) {
+  return abilities
+    .filter(buildNotHiddenPokemonAbilities)
+    .map(ability => ability['ability']['name']);
 }
+
+export function buildLatestDescription(pokemonSpecies) {
+  return pokemonSpecies['flavor_text_entries']
+    .filter(entry => entry['language']['name'] === 'en')
+    .find(entry => entry['version']['name'] === 'alpha-sapphire')
+    ['flavor_text'];
+};
 
 export function buildSelectedPokemonInfo(pokemon) {
   return {
     id: buildPokemonId(pokemon['id']),
     name: pokemon['name'],
     types: pokemon['types'].map(buildPokemonTypes),
+    abilities: buildPokemonAbilities(pokemon['abilities']),
     stats: pokemon['stats'],
     weight: pokemon['weight'],
     height: pokemon['height'],
@@ -44,6 +62,7 @@ export function createDefaultPokemonState() {
     entities: [],
     selectedPokemonInfo: null,
     getPokemonListLoadable: createDefaultLoadable(),
-    getSelectedPokemonInfoLoadable: createDefaultLoadable()
+    getSelectedPokemonInfoLoadable: createDefaultLoadable(),
+    getSelectedPokemonSpeciesInfoLoadable: createDefaultLoadable()
   };
 }

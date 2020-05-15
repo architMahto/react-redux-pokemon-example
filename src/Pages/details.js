@@ -5,8 +5,9 @@ export const Details = ({ selectedPokemonInfo }) => {
 
   return (
     <>
-      <h2 style={{'textTransform': 'capitalize'}}>{pokemonInfo['name']} #{pokemonInfo['id']}</h2>
+      <h1 style={{'textTransform': 'capitalize'}}>{pokemonInfo['name']} #{pokemonInfo['id']}</h1>
       <img src={pokemonInfo['imageUrl']} alt={pokemonInfo['name']} width="50%" />
+      <p style={{'fontSize': '1.5rem'}}>{pokemonInfo['description']}</p>
     </>
   );
 };

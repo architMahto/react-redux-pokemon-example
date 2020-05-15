@@ -4,9 +4,11 @@ import {
   getPokemonListSuccess,
   getPokemonListError,
   getSelectedPokemonInfoSuccess,
-  getSelectedPokemonInfoError
+  getSelectedPokemonInfoError,
+  getSelectedPokemonSpeciesInfoSuccess,
+  getSelectedPokemonSpeciesInfoError
 } from '../Actions/pokemonStateActions';
-import { buildPokemonList, buildSelectedPokemonInfo } from '../../Models/pokemonState';
+import { buildPokemonList, buildSelectedPokemonInfo, buildLatestDescription } from '../../Models/pokemonState';
 import PokemonService from '../../Services/pokemonService';
 
 export function* onGetPokemonList(action) {
@@ -22,11 +24,22 @@ export function* onGetPokemonList(action) {
 
 export function* onGetSelectedPokemonInfo(action) {
   try {
-    let response = yield call(PokemonService.retrievePokemonByName, action.pokemonName);
+    let response = yield call(PokemonService.retrievePokemonInfoByName, action.pokemonName);
     yield put(getSelectedPokemonInfoSuccess(
       buildSelectedPokemonInfo(response)
     ));
   } catch (err) {
     yield put(getSelectedPokemonInfoError(err));
+  }
+};
+
+export function* onGetSelectedPokemonSpeciesInfo(action) {
+  try {
+    let response = yield call(PokemonService.retrievePokemonSpeciesInfoByName, action.pokemonName);
+    yield put(getSelectedPokemonSpeciesInfoSuccess(
+      buildLatestDescription(response)
+    ));
+  } catch (err) {
+    yield put(getSelectedPokemonSpeciesInfoError(err));
   }
 };
