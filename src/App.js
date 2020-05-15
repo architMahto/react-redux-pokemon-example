@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import {
   Navbar,
@@ -7,22 +7,13 @@ import {
   NavbarBrand,
 } from 'reactstrap';
 
-import { getPokemonState } from './State/Selectors/pokemonStateSelectors';
-import { getPokemon } from './State/Actions/pokemonStateActions';
+import { HomeContainer } from './Pages/homeContainer';
 
 import './App.css';
 
 function App() {
-  const pokemonState = useSelector(getPokemonState);
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
   const toggle = () => setIsOpen(!isOpen);
-
-  useEffect(() => {
-    if (!pokemonState.getPokemonLoadable.isReceived) {
-      dispatch(getPokemon())
-    }
-  }, []);
 
   return (
     <div className="App">
@@ -30,6 +21,9 @@ function App() {
         <NavbarBrand href="/">Pokédex</NavbarBrand>
         <NavbarToggler onClick={toggle} />
       </Navbar>
+      <Switch>
+        <Route path="/" component={HomeContainer} />
+      </Switch>
     </div>
   );
 }

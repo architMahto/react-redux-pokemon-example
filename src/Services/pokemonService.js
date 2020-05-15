@@ -3,7 +3,7 @@ import queryString from 'query-string';
 const BASE_API_URL = 'https://pokeapi.co/api/v2';
 
 export default class PokemonService {
-  static async retrievePokemon(pokemonView={limit: 50}) {
+  static async retrievePokemon(pokemonView={limit: 25}) {
     const pokemonViewQueryString = queryString.stringify(pokemonView);
 
     return fetch(`${BASE_API_URL}/pokemon/?${pokemonViewQueryString}`)
