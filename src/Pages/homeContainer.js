@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPokemonState } from '../State/Selectors/pokemonStateSelectors';
-import { getPokemon } from '../State/Actions/pokemonStateActions';
+import { getPokemonList } from '../State/Actions/pokemonStateActions';
 
 import { Home } from './home';
 
@@ -15,15 +15,15 @@ export const HomeContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!pokemonState.getPokemonLoadable.isReceived) {
-      dispatch(getPokemon());
+    if (!pokemonState.getPokemonListLoadable.isReceived) {
+      dispatch(getPokemonList());
     }
   }, []);
 
   return (
     <div className="App-Page">
       <HomeWithLoading
-        loadable={pokemonState.getPokemonLoadable}
+        loadable={pokemonState.getPokemonListLoadable}
         pokemonList={pokemonState.entities}
       />
     </div>

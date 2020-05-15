@@ -7,6 +7,7 @@ import {
   NavbarBrand,
 } from 'reactstrap';
 
+import { DetailsContainer } from './Pages/detailsContainer';
 import { HomeContainer } from './Pages/homeContainer';
 
 import './App.css';
@@ -22,7 +23,8 @@ function App() {
         <NavbarToggler onClick={toggle} />
       </Navbar>
       <Switch>
-        <Route path="/" component={HomeContainer} />
+        <Route exact path="/" component={HomeContainer} />
+        <Route path="/details/:id" component={DetailsContainer} />
       </Switch>
     </div>
   );

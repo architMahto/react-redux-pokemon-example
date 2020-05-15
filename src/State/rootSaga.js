@@ -1,11 +1,21 @@
 import { all, takeLatest } from 'redux-saga/effects';
 
-import { GET_POKEMON } from './Actions/pokemonStateActions';
+import {
+  GET_POKEMON_LIST,
+  GET_SELECTED_POKEMON_INFO,
+  GET_SELECTED_POKEMON_SPECIES_INFO
+} from './Actions/pokemonStateActions';
 
-import { onGetPokemon } from './Sagas/pokemonStateSagas';
+import {
+  onGetPokemonList,
+  onGetSelectedPokemonInfo,
+  onGetSelectedPokemonSpeciesInfo
+} from './Sagas/pokemonStateSagas';
 
 export default function* rootSaga() {
   yield all([
-    takeLatest(GET_POKEMON, onGetPokemon)
+    takeLatest(GET_POKEMON_LIST, onGetPokemonList),
+    takeLatest(GET_SELECTED_POKEMON_INFO, onGetSelectedPokemonInfo),
+    takeLatest(GET_SELECTED_POKEMON_SPECIES_INFO, onGetSelectedPokemonSpeciesInfo)
   ]);
 }
